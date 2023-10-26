@@ -111,16 +111,16 @@ const quitar_elemento=(e)=>{
         articulos_carrito = articulos_carrito.filter((articulo)=> articulo.id !== id_curso )
         carrito_HTML(articulos_carrito)
     }
-    actualizar_carrito()
+    actualizar_carrito_ls()
 
 
 }
 
-const recuperar_carrito=()=>{
+const recuperar_carrito_ls=()=>{
     localStorage.getItem( 'carrito')
 }
 
-const actualizar_carrito=()=>{
+const actualizar_carrito_ls=()=>{
     localStorage.setItem('carrito', JSON.stringify(articulos_carrito))
 
 }
@@ -131,7 +131,7 @@ const gestionar_eventos = () =>{
 
     lista_cursos.addEventListener("click", (e)=>{
         aniadir_carrito(e)
-        actualizar_carrito()
+        actualizar_carrito_ls()
     })
     boton_vaciar_carrito.addEventListener("click", ()=>{
         limpiar()
@@ -142,7 +142,9 @@ const gestionar_eventos = () =>{
 
 
     window.addEventListener('load', ()=>{
-        recuperar_carrito()
+        recuperar_carrito_ls()
+        const carrito_guardado = JSON.parse(localStorage.getItem( 'carrito'))
+        carrito_HTML(carrito_guardado)
     })
     window.addEventListener('beforeunload', ()=>{
 
